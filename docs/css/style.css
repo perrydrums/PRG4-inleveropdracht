@@ -1,3 +1,21 @@
 body{
     background-color: lightblue;
 }
+
+
+@font-face{
+    src: url("font/Candara.ttf");
+    font-family: Candara;
+}
+
+h1{
+    font-family: "Candara";
+    font-size: 60px;
+    text-align: center;
+}
+
+food{
+    background-color: red;
+    width: 20px;
+    height: 20px;
+}
