@@ -2,10 +2,56 @@
 <html>
 <head>
 	<meta id='viewport' name="viewport" content="width=device-width user-scalable=no maximum-scale=1, initial-scale=1"/>
-	<title>GAME</title>
+	<title>MORTY MACHINE</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
+	<div id="background"></div>
+	<div id="morties"></div>
+	<div id="mortiesSecond"></div>
+
+	
+	<div id="menu">
+		<div id="menuBackground" onclick="playRickAudio();"></div>
+	</div>
+	
+
+	<!-- AUDIO -->
+
+	<audio id="rickAudio1" src="https://sound.peal.io/ps/audios/000/000/543/original/lick_my_balls.wav"></audio>
+	<audio id="rickAudio2" src="https://sound.peal.io/ps/audios/000/000/533/original/Riggity.wav"></audio>
+	<audio id="rickAudio3" src="https://sound.peal.io/ps/audios/000/000/545/original/Burger_Time!.wav"></audio>
+
+	<audio id="startAudio" src="https://sound.peal.io/ps/audios/000/000/537/original/woo_vu_luvub_dub_dub.wav"></audio>
+
+	<audio id="mortyAudio" src="sound/morty.wav"></audio>
+	<audio id="errorAudio" src="sound/error.wav"></audio>
+
+	<audio id="portalAudio" src="sound/portalGun.mp3"></audio>
+	<audio id="dreamInceptorAudio" src="https://sound.peal.io/ps/audios/000/000/546/original/this_is_how_you_dream_bitch.wav"></audio>
+	<audio id="mrMeeseeksAudio" src="https://sound.peal.io/ps/audios/000/000/548/original/Hi_I'm_mr_meeseeks_look_at_me.wav"></audio>
+	
+
 	<script src='js/main.js'></script>
+	<script>
+		function playRickAudio(){
+			var randomNumber = Math.ceil(Math.random() * 3);
+			console.log(randomNumber);
+			switch(n = randomNumber){
+				case 1:
+					var audio = document.getElementById("rickAudio1");
+					break;
+				case 2:
+					var audio = document.getElementById("rickAudio2");
+					break;
+				case 3:
+					var audio = document.getElementById("rickAudio3");
+					break;
+				default:
+					break;
+			}
+			audio.play();
+		}
+	</script>
 </body>
 </html>
