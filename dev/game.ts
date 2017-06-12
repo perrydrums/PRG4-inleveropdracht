@@ -1,23 +1,18 @@
 class Game{
 
-    private _morty : Morty;
-    public static points : number = 0;
+    private morty : Morty;
+    public points : number = 0;
 
     private menu : Menu;
-
-    get morty(){
-        return this._morty;
-    }
-    set morty(morty:Morty){
-        this._morty = Morty;
-    }
     
     constructor(){
 
-        this.morty = new Morty;
-        this.menu = new Menu;
+        window.alert("Make sure you turn up the volume!");
+        var audio = document.getElementById("startAudio");
+        audio.play();
 
-        document.getElementById("morty").addEventListener("click", e => this.addPoint(e));
+        this.morty = new Morty(this); //Morty regelt eventListener en spreekt addPoints aan
+        this.menu = new Menu(this);
 
         requestAnimationFrame(() => this.gameLoop());
 
@@ -29,12 +24,12 @@ class Game{
 
         this.menu.items.checkItems();
 
-
         requestAnimationFrame(() => this.gameLoop());
+
     }
 
-    public addPoint(e:any){
-        Game.points++;
+    public addPoint(){
+        this.points++;
         var audio = document.getElementById("mortyAudio");
         audio.pause(); //ignore errors, it works
         audio.currentTime = 0;
@@ -47,7 +42,7 @@ class Game{
                             Item.numDreamInceptors * 6 +
                             Item.numMrMeeseeks * 20;
 
-        document.getElementById("morties").innerHTML = "<h1>" + Math.floor(Game.points) + " Morties</h1>";
+        document.getElementById("morties").innerHTML = "<h1>" + Math.floor(this.points) + " Morties</h1>";
         document.getElementById("mortiesSecond").innerHTML = "<h2>" + totalSpeed + " Morties/second</h2>";
     }
 

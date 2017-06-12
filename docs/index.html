@@ -9,11 +9,7 @@
 	<div id="background"></div>
 	<div id="morties"></div>
 	<div id="mortiesSecond"></div>
-
-	
-	<div id="menu">
-		<div id="menuBackground" onclick="playRickAudio();"></div>
-	</div>
+	<div id="menu"></div>
 	
 
 	<!-- AUDIO -->
@@ -31,27 +27,7 @@
 	<audio id="dreamInceptorAudio" src="https://sound.peal.io/ps/audios/000/000/546/original/this_is_how_you_dream_bitch.wav"></audio>
 	<audio id="mrMeeseeksAudio" src="https://sound.peal.io/ps/audios/000/000/548/original/Hi_I'm_mr_meeseeks_look_at_me.wav"></audio>
 	
-
 	<script src='js/main.js'></script>
-	<script>
-		function playRickAudio(){
-			var randomNumber = Math.ceil(Math.random() * 3);
-			console.log(randomNumber);
-			switch(n = randomNumber){
-				case 1:
-					var audio = document.getElementById("rickAudio1");
-					break;
-				case 2:
-					var audio = document.getElementById("rickAudio2");
-					break;
-				case 3:
-					var audio = document.getElementById("rickAudio3");
-					break;
-				default:
-					break;
-			}
-			audio.play();
-		}
-	</script>
+
 </body>
 </html>

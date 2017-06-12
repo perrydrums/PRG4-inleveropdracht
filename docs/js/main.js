@@ -8,32 +8,48 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var AudioHandler = (function () {
+    function AudioHandler() {
+    }
+    AudioHandler.prototype.playRick = function () {
+        var randomNumber = Math.ceil(Math.random() * 3);
+        console.log(randomNumber);
+        switch (randomNumber) {
+            case 1:
+                var audio = document.getElementById("rickAudio1");
+                break;
+            case 2:
+                var audio = document.getElementById("rickAudio2");
+                break;
+            case 3:
+                var audio = document.getElementById("rickAudio3");
+                break;
+            default:
+                break;
+        }
+        audio.play();
+    };
+    return AudioHandler;
+}());
 var Game = (function () {
     function Game() {
         var _this = this;
-        this.morty = new Morty;
-        this.menu = new Menu;
-        document.getElementById("morty").addEventListener("click", function (e) { return _this.addPoint(e); });
+        this.points = 0;
+        window.alert("Make sure you turn up the volume!");
+        var audio = document.getElementById("startAudio");
+        audio.play();
+        this.morty = new Morty(this);
+        this.menu = new Menu(this);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
-    Object.defineProperty(Game.prototype, "morty", {
-        get: function () {
-            return this._morty;
-        },
-        set: function (morty) {
-            this._morty = Morty;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.showPoints();
         this.menu.items.checkItems();
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
-    Game.prototype.addPoint = function (e) {
-        Game.points++;
+    Game.prototype.addPoint = function () {
+        this.points++;
         var audio = document.getElementById("mortyAudio");
         audio.pause();
         audio.currentTime = 0;
@@ -43,21 +59,21 @@ var Game = (function () {
         var totalSpeed = Item.numPortals +
             Item.numDreamInceptors * 6 +
             Item.numMrMeeseeks * 20;
-        document.getElementById("morties").innerHTML = "<h1>" + Math.floor(Game.points) + " Morties</h1>";
+        document.getElementById("morties").innerHTML = "<h1>" + Math.floor(this.points) + " Morties</h1>";
         document.getElementById("mortiesSecond").innerHTML = "<h2>" + totalSpeed + " Morties/second</h2>";
     };
     return Game;
 }());
-Game.points = 0;
 var Item = (function () {
-    function Item() {
+    function Item(g) {
         this.name = "Item";
         this.cost = 120;
         this.speed = 5;
+        this.game = g;
     }
     Item.prototype.activateItem = function (theName, theCost) {
-        if (Game.points >= theCost) {
-            Game.points -= theCost;
+        if (this.game.points >= theCost) {
+            this.game.points -= theCost;
             console.log(theName + " with speed 000 bought for " + theCost);
             if (theName == "portal") {
                 Item.numPortals++;
@@ -111,9 +127,9 @@ var Item = (function () {
         }
     };
     Item.prototype.checkItems = function () {
-        Game.points += Item.numPortals * (1 / 60);
-        Game.points += Item.numDreamInceptors * (6 / 60);
-        Game.points += Item.numMrMeeseeks * (20 / 60);
+        this.game.points += Item.numPortals * (1 / 60);
+        this.game.points += Item.numDreamInceptors * (6 / 60);
+        this.game.points += Item.numMrMeeseeks * (20 / 60);
     };
     return Item;
 }());
@@ -122,75 +138,82 @@ Item.numDreamInceptors = 0;
 Item.numMrMeeseeks = 0;
 var Portal = (function (_super) {
     __extends(Portal, _super);
-    function Portal() {
-        var _this = _super.call(this) || this;
+    function Portal(g) {
+        var _this = _super.call(this, g) || this;
         var li = document.createElement("li");
         li.setAttribute("id", "portal");
         document.getElementById("shopList").appendChild(li);
         li.innerHTML = "PORTAL (50 Morties)";
-        document.getElementById("portal").addEventListener("click", function (e) { return _this.setItem(e); });
+        document.getElementById("portal").addEventListener("click", function () { return _this.setItem(); });
         return _this;
     }
-    Portal.prototype.setItem = function (e) {
+    Portal.prototype.setItem = function () {
         _super.prototype.activateItem.call(this, "portal", 50);
     };
     return Portal;
 }(Item));
 var DreamInceptor = (function (_super) {
     __extends(DreamInceptor, _super);
-    function DreamInceptor() {
-        var _this = _super.call(this) || this;
+    function DreamInceptor(g) {
+        var _this = _super.call(this, g) || this;
         var li = document.createElement("li");
         li.setAttribute("id", "dreamInceptor");
         document.getElementById("shopList").appendChild(li);
         li.innerHTML = "DREAMINCEPTOR (250 Morties)";
-        document.getElementById("dreamInceptor").addEventListener("click", function (e) { return _this.setItem(e); });
+        document.getElementById("dreamInceptor").addEventListener("click", function () { return _this.setItem(); });
         return _this;
     }
-    DreamInceptor.prototype.setItem = function (e) {
+    DreamInceptor.prototype.setItem = function () {
         _super.prototype.activateItem.call(this, "dreamInceptor", 250);
     };
     return DreamInceptor;
 }(Item));
 var MrMeeseeks = (function (_super) {
     __extends(MrMeeseeks, _super);
-    function MrMeeseeks() {
-        var _this = _super.call(this) || this;
+    function MrMeeseeks(g) {
+        var _this = _super.call(this, g) || this;
         var li = document.createElement("li");
         li.setAttribute("id", "mrMeeseeks");
         document.getElementById("shopList").appendChild(li);
         li.innerHTML = "MRMEESEEK (3000 Morties)";
-        document.getElementById("mrMeeseeks").addEventListener("click", function (e) { return _this.setItem(e); });
+        document.getElementById("mrMeeseeks").addEventListener("click", function () { return _this.setItem(); });
         return _this;
     }
-    MrMeeseeks.prototype.setItem = function (e) {
+    MrMeeseeks.prototype.setItem = function () {
         _super.prototype.activateItem.call(this, "mrMeeseeks", 3000);
     };
     return MrMeeseeks;
 }(Item));
 window.addEventListener("load", function () {
-    window.alert("Make sure you turn up the volume!");
-    var audio = document.getElementById("startAudio");
-    audio.play();
     new Game();
 });
 var Menu = (function () {
-    function Menu() {
-        this.items = new Item;
+    function Menu(g) {
+        var _this = this;
+        this.game = g;
+        this.items = new Item(this.game);
         var shopList = document.createElement("ul");
         shopList.setAttribute("id", "shopList");
         document.getElementById("menu").appendChild(shopList);
-        var portal = new Portal;
-        var dreamInceptor = new DreamInceptor;
-        var mrMeeseeks = new MrMeeseeks;
+        this.audioHandler = new AudioHandler();
+        var rick = document.createElement("div");
+        rick.setAttribute("id", "menuBackground");
+        document.getElementById("menu").appendChild(rick);
+        rick.addEventListener("click", function () { return _this.audioHandler.playRick(); });
+        var portal = new Portal(this.game);
+        var dreamInceptor = new DreamInceptor(this.game);
+        var mrMeeseeks = new MrMeeseeks(this.game);
     }
     return Menu;
 }());
 var Morty = (function () {
-    function Morty() {
-        var morty = document.createElement("div");
-        morty.setAttribute("id", "morty");
-        document.body.appendChild(morty);
+    function Morty(g) {
+        var _this = this;
+        this.game = g;
+        this.div = document.createElement("div");
+        this.div.setAttribute("id", "morty");
+        document.body.appendChild(this.div);
+        this.div.addEventListener("click", function () { return _this.game.addPoint(); });
     }
     return Morty;
 }());

@@ -4,21 +4,23 @@ class Item{
     public cost : number = 120;
     public speed : number = 5;
 
+    protected game : Game;
+
 
     static numPortals :         number = 0;
     static numDreamInceptors :  number = 0;
     static numMrMeeseeks :      number = 0;
 
 
-    constructor(){
-
+    constructor(g:Game){
+        this.game = g;
     }
 
     activateItem(theName : string, theCost : number){
 
-        if(Game.points >= theCost){
+        if(this.game.points >= theCost){
 
-            Game.points -= theCost;
+            this.game.points -= theCost;
 
             console.log(theName + " with speed 000 bought for " + theCost);
 
@@ -78,9 +80,9 @@ class Item{
 
         // RATE / 60 === RATE per second [if browser FPS = 60]
 
-        Game.points += Item.numPortals * (1/60);
-        Game.points += Item.numDreamInceptors * (6/60);
-        Game.points += Item.numMrMeeseeks * (20/60);
+        this.game.points += Item.numPortals * (1/60);
+        this.game.points += Item.numDreamInceptors * (6/60);
+        this.game.points += Item.numMrMeeseeks * (20/60);
 
     }
 
