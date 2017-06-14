@@ -2,14 +2,11 @@ class Game{
 
     private morty : Morty;
     public points : number = 0;
+    private sScreen : StartScreen;
 
     private menu : Menu;
     
     constructor(){
-
-        window.alert("Make sure you turn up the volume!");
-        var audio = document.getElementById("startAudio");
-        audio.play();
 
         this.morty = new Morty(this); //Morty regelt eventListener en spreekt addPoints aan
         this.menu = new Menu(this);

@@ -35,9 +35,6 @@ var Game = (function () {
     function Game() {
         var _this = this;
         this.points = 0;
-        window.alert("Make sure you turn up the volume!");
-        var audio = document.getElementById("startAudio");
-        audio.play();
         this.morty = new Morty(this);
         this.menu = new Menu(this);
         requestAnimationFrame(function () { return _this.gameLoop(); });
@@ -185,7 +182,7 @@ var MrMeeseeks = (function (_super) {
     return MrMeeseeks;
 }(Item));
 window.addEventListener("load", function () {
-    new Game();
+    new StartScreen;
 });
 var Menu = (function () {
     function Menu(g) {
@@ -216,5 +213,32 @@ var Morty = (function () {
         this.div.addEventListener("click", function () { return _this.game.addPoint(); });
     }
     return Morty;
+}());
+var StartScreen = (function () {
+    function StartScreen() {
+        this.background = document.createElement("div");
+        document.body.appendChild(this.background);
+        this.background.setAttribute("id", "overlay");
+        this.background = document.createElement("div");
+        document.body.appendChild(this.background);
+        this.background.setAttribute("id", "startScreen");
+        var inside = document.createElement("div");
+        this.background.appendChild(inside);
+        inside.setAttribute("id", "startScreenInside");
+        inside.innerHTML = "<h3>Morty Machine</h3><h4>A Rick and Morty inspired clicker game</h4><h2>Make sure to turn up the volume!</h2>";
+        var button = document.createElement("button");
+        inside.appendChild(button);
+        button.setAttribute("id", "button");
+        button.innerHTML = "Start Game";
+        button.addEventListener("click", this.startGame);
+    }
+    StartScreen.prototype.startGame = function () {
+        document.getElementById("startScreen").remove();
+        document.getElementById("overlay").remove();
+        var startAudio = document.getElementById("startAudio");
+        startAudio.play();
+        new Game;
+    };
+    return StartScreen;
 }());
 //# sourceMappingURL=main.js.map

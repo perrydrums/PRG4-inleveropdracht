@@ -23,6 +23,26 @@ body{
     left: 0px;
 }
 
+#overlay{
+    background-color: rgba(0,0,0,0.8);
+    top: 0; left: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100vw; height: 100vh;
+}
+
+#startScreen{
+    position: absolute;
+    width: 70vw; height: 70vh;
+    z-index: 3;
+    top: 15vh; left: 15vw;
+    background-color: #01B1C8;
+    border: 3px solid white;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+}
+
 
 @font-face{
     src: url("font/Candara.ttf");
@@ -41,6 +61,27 @@ h2{
     font-family: "Candara";
     font-size: 20px;
     text-align: center;
+}
+
+h3{
+    font-family: "Candara";
+    font-size: 50px;
+    text-align: center;
+}
+
+h4{
+    font-family: "Candara";
+    font-size: 30px;
+    text-align: center;
+}
+
+#button{
+    width: 200px; height: 40px;
+    background-color: blue;
+    border: 2px solid white;
+    border-radius: 20px;
+    outline: none;
+    color: white;
 }
 
 #morty{
