@@ -26,14 +26,12 @@ class StartScreen{
         button.innerHTML = "Start Game";
         button.addEventListener("click", this.startGame);
 
-        
-
-
     }
 
-    startGame(){
+    private startGame(){
         document.getElementById("startScreen").remove();
         document.getElementById("overlay").remove();
+
         let startAudio = document.getElementById("startAudio");
         startAudio.play();
         new Game;

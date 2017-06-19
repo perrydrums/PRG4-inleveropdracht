@@ -31,6 +31,11 @@ var AudioHandler = (function () {
     };
     return AudioHandler;
 }());
+var EndScreen = (function () {
+    function EndScreen() {
+    }
+    return EndScreen;
+}());
 var Game = (function () {
     function Game() {
         var _this = this;
@@ -63,9 +68,6 @@ var Game = (function () {
 }());
 var Item = (function () {
     function Item(g) {
-        this.name = "Item";
-        this.cost = 120;
-        this.speed = 5;
         this.game = g;
     }
     Item.prototype.activateItem = function (theName, theCost) {

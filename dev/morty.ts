@@ -1,7 +1,6 @@
 class Morty{
 
     private div : HTMLElement;
-
     private game:Game;
 
     constructor(g:Game){

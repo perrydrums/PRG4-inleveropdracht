@@ -1,11 +1,6 @@
 class Item{
 
-    public name : string = "Item";
-    public cost : number = 120;
-    public speed : number = 5;
-
     protected game : Game;
-
 
     static numPortals :         number = 0;
     static numDreamInceptors :  number = 0;
@@ -16,7 +11,7 @@ class Item{
         this.game = g;
     }
 
-    activateItem(theName : string, theCost : number){
+    protected activateItem(theName : string, theCost : number){
 
         if(this.game.points >= theCost){
 
@@ -76,7 +71,7 @@ class Item{
         }
     }
 
-    public checkItems(){
+    private checkItems(){
 
         // RATE / 60 === RATE per second [if browser FPS = 60]
 

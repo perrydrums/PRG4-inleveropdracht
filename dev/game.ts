@@ -1,11 +1,10 @@
 class Game{
 
     private morty : Morty;
-    public points : number = 0;
-    private sScreen : StartScreen;
-
     private menu : Menu;
-    
+
+    public points : number = 0;
+
     constructor(){
 
         this.morty = new Morty(this); //Morty regelt eventListener en spreekt addPoints aan
@@ -33,7 +32,7 @@ class Game{
         audio.play();
     }
 
-    public showPoints(){
+    private showPoints(){
 
         let totalSpeed =    Item.numPortals + 
                             Item.numDreamInceptors * 6 +
