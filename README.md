@@ -33,6 +33,10 @@ In Items.ts staan meerdere classes. Deze erven allemaal over van Item.ts
 
 <br><br>
 
+Ik heb feedback aan Jan-Willem gegeven. [Bekijk hier](https://github.com/JWTP/PRG4GAME)
+
+<br><br>
+
 Programmed in OOP TypeScript.
 
 Sounds from [www.peal.io](www.peal.io)<br>
